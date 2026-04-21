@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartChat UI</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .chat-container {
+        width: 350px;
+        height: 500px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .chat-header {
+        background: #2b6cb0;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .chat-box {
+        flex: 1;
+        padding: 10px;
+        overflow-y: scroll;
+    }
+
+    .message {
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 8px;
+        max-width: 70%;
+    }
+
+    .user {
+        background: #ffd3b6;
+        align-self: flex-end;
+    }
+
+    .bot {
+        background: #e2e8f0;
+        align-self: flex-start;
+    }
+
+    .input-area {
+        display: flex;
+        border-top: 1px solid #ddd;
+    }
+
+    input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        outline: none;
+    }
+
+    button {
+        background: #2b6cb0;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1a4a7a;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">SmartChat UI</div>
+
+    <div class="chat-box" id="chatBox"></div>
+
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="Type a message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("userInput");
+    let message = input.value.trim();
+
+    if (message === "") return;
+
+    addMessage(message, "user");
+    input.value = "";
+
+    setTimeout(() => {
+        let response = getBotResponse(message);
+        addMessage(response, "bot");
+    }, 500);
+}
+
+function addMessage(text, sender) {
+    let chatBox = document.getElementById("chatBox");
+    let msgDiv = document.createElement("div");
+
+    msgDiv.classList.add("message", sender);
+    msgDiv.innerText = text;
+
+    chatBox.appendChild(msgDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function getBotResponse(input) {
+    input = input.toLowerCase().trim();
+    
+    
+    if (input === "hi" || input === "hello" || input.startsWith("hi ") || input.startsWith("hello ")) {
+    return "Hello! I am SmartChat 🤖\nHow are you today?";
+    }
+    else if (input.includes("not good") || input.includes("bad") || input.includes("upset")) {
+        return "Ohh, sorry to hear that 😔. Is there anything I can help you with?";
+    } 
+    else if (input.includes("good") || input.includes("great") || input.includes("fine")) {
+        return "That's great to know 😊. How can I help you?";
+    }
+    else if (input.includes("nothing") || input.includes("nah") || input.trim() === "no") {
+        return "Alright 😊, feel free to come back anytime!";
+    }
+    else if (input.includes("project")) {
+        return "Check out:\n1) Smart Aqua Grow\n2) Water Level Indicator\n3) Gesture Control System\n4) Smart Glasses\n5) Blind Stick\n6) Chat Bot";
+    }
+    else if (input.includes("aqua grow") || input.includes("1")) {
+        return "The Smart Aqua Grow project is an automated plant watering system designed to maintain optimal soil moisture levels without manual effort. It uses moisture sensors to detect the water content in the soil and controls a water pump accordingly. When the soil becomes dry, the system automatically activates the pump to supply water to the plants. This helps in conserving water and ensures healthy plant growth. The project is cost-effective, efficient, and suitable for home gardens, agriculture, and smart irrigation systems.";
+    }
+    else if (input.includes("water") || input.includes("2")) {
+        return "A water level indicator is a system used to monitor and display the level of water in a tank or container. It works by using sensors or probes that detect water levels and provide indications through LEDs or displays. This helps prevent overflow, ensures efficient water usage, and protects pumps from dry running.";
+    }    
+    else if (input.includes("gesture") || input.includes("3")) {
+        return "This project uses two ultrasonic sensors with an Arduino to detect hand movements and measure the distance between the hand and sensors. The sensors are placed on the top edges of a laptop screen, and the collected data is sent to a Python program. The distance readings are then converted into keyboard and system control actions. Different gestures like moving the hand closer or farther, or swiping across sensors, allow the user to perform tasks such as scrolling, adjusting volume, switching tabs, and controlling media playback.";
+    }    
+    else if (input.includes("stick") || input.includes("5")) {
+        return "The Ultrasonic Blind Stick is an assistive device designed to help visually impaired individuals navigate safely using obstacle detection technology. It uses ultrasonic sensors to detect nearby obstacles and alerts the user through buzzer or vibration signals. The integration of GPS enables real-time location tracking, while the GSM module allows sending emergency messages with location details to predefined contacts. This system enhances safety, independence, and mobility for users in both indoor and outdoor environments.";
+    }    
+    else if (input.includes("glasses") || input.includes("4")) {
+        return "The Smart Vision Glasses are designed to assist visually impaired individuals by providing real-time environmental awareness through advanced image processing. The system uses a camera along with a Convolutional Neural Network (CNN) to detect and recognize objects around the user, while an integrated API enables communication for features like voice feedback and navigation assistance. It also incorporates GPS for real-time location tracking and GSM for sending emergency alerts to predefined contacts. This combination enhances safety, independence, and accessibility by converting visual data into useful alerts for the user.";
+    }    
+    else if (input.includes("chat") || input.includes("6")) {
+        return "The SmartChat UI is a simple web-based chatbot built using HTML, CSS, and JavaScript to simulate basic human-like conversations. It processes user input and responds using predefined rules and keyword matching techniques. The chatbot provides interactive replies for greetings, emotions, and project-related queries, making it user-friendly and engaging. This project demonstrates fundamental concepts of front-end development and logical thinking in building conversational interfaces.";
+    }
+    else if (input.includes("bye") || input.includes("thanks"))  {
+        return "Goodbye! Have a great day! 👋";
+    } 
+    else {
+        return "Sorry, I didn't understand that 🤔";
+    }
+}
+
+
+
+// Enter key support
+document.getElementById("userInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>
