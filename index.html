@@ -38,6 +38,8 @@
         flex: 1;
         padding: 10px;
         overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
     }
 
     .message {
@@ -45,6 +47,7 @@
         padding: 10px;
         border-radius: 8px;
         max-width: 70%;
+        white-space: pre-wrap;
     }
 
     .user {
@@ -73,12 +76,20 @@
         background: #2b6cb0;
         color: white;
         border: none;
-        padding: 10px 15px;
+        padding: 10px 12px;
         cursor: pointer;
     }
 
     button:hover {
         background: #1a4a7a;
+    }
+
+    .clear-btn {
+        background: #e53e3e;
+    }
+
+    .clear-btn:hover {
+        background: #c53030;
     }
 </style>
 </head>
@@ -93,6 +104,7 @@
     <div class="input-area">
         <input type="text" id="userInput" placeholder="Type a message..." />
         <button onclick="sendMessage()">Send</button>
+        <button class="clear-btn" onclick="clearChat()">Clear</button>
     </div>
 </div>
 
@@ -123,12 +135,22 @@ function addMessage(text, sender) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+function clearChat() {
+    let chatBox = document.getElementById("chatBox");
+    chatBox.innerHTML = "";
+
+    document.getElementById("userInput").value = "";
+
+    setTimeout(() => {
+        addMessage("Chat cleared! You can start again 😊", "bot");
+    }, 200);
+}
+
 function getBotResponse(input) {
     input = input.toLowerCase().trim();
     
-    
-    if (input === "hi" || input === "hello" || input.startsWith("hi ") || input.startsWith("hello ")) {
-    return "Hello! I am SmartChat 🤖\nHow are you today?";
+    if (input === "hi" || input === "hello" || input.startsWith("hii") || input.startsWith("hello ")) {
+        return "Hello! I am SmartChat 🤖\nHow are you today?";
     }
     else if (input.includes("not good") || input.includes("bad") || input.includes("upset")) {
         return "Ohh, sorry to hear that 😔. Is there anything I can help you with?";
@@ -166,9 +188,7 @@ function getBotResponse(input) {
     else {
         return "Sorry, I didn't understand that 🤔";
     }
-}
-
-
+}   
 
 // Enter key support
 document.getElementById("userInput").addEventListener("keypress", function(e) {
@@ -180,3 +200,6 @@ document.getElementById("userInput").addEventListener("keypress", function(e) {
 
 </body>
 </html>
+
+
+
