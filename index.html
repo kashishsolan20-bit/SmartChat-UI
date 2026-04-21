@@ -161,8 +161,18 @@ function getBotResponse(input) {
     else if (input.includes("nothing") || input.includes("nah") || input.trim() === "no") {
         return "Alright 😊, feel free to come back anytime!";
     }
-    else if (input.includes("project")) {
-        return "Check out:\n1) Smart Aqua Grow\n2) Water Level Indicator\n3) Gesture Control System\n4) Smart Glasses\n5) Blind Stick\n6) Chat Bot";
+        const projectKeywords = [
+    "project",
+    "work",
+    "built",
+    "made",
+    "portfolio",
+    "what can you do",
+    "show me"
+];
+
+if (projectKeywords.some(word => input.includes(word))) {
+    return "Check out:\n1) Smart Aqua Grow\n2) Water Level Indicator\n3) Gesture Control System\n4) Smart Glasses\n5) Blind Stick\n6) Chat Bot";
     }
     else if (input.includes("aqua grow") || input.includes("1")) {
         return "The Smart Aqua Grow project is an automated plant watering system designed to maintain optimal soil moisture levels without manual effort. It uses moisture sensors to detect the water content in the soil and controls a water pump accordingly. When the soil becomes dry, the system automatically activates the pump to supply water to the plants. This helps in conserving water and ensures healthy plant growth. The project is cost-effective, efficient, and suitable for home gardens, agriculture, and smart irrigation systems.";
