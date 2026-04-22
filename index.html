@@ -145,67 +145,85 @@ function clearChat() {
         addMessage("Chat cleared! You can start again 😊", "bot");
     }, 200);
 }
-
 function getBotResponse(input) {
     input = input.toLowerCase().trim();
-    
+
+    const projectKeywords = [
+        "project",
+        "work",
+        "built",
+        "made",
+        "portfolio",
+        "what can you do",
+        "show me",
+        "what",
+        "who",
+        "how",
+        "anything",
+        "something",
+        "regarding",
+        "yes"
+    ];
+
     if (input === "hi" || input === "hello" || input.startsWith("hii") || input.startsWith("hello ")) {
         return "Hello! I am SmartChat 🤖\nHow are you today?";
     }
-    else if (input.includes("not good") || input.includes("bad") || input.includes("upset")) {
-        return "Ohh, sorry to hear that 😔. Is there anything I can help you with?";
-    } 
-    else if (input.includes("good") || input.includes("great") || input.includes("fine")) {
-        return "That's great to know 😊. How can I help you?";
-    }
-    else if (input.includes("nothing") || input.includes("nah") || input.trim() === "no") {
-        return "Alright 😊, feel free to come back anytime!";
-    }
-        const projectKeywords = [
-    "project",
-    "work",
-    "built",
-    "made",
-    "portfolio",
-    "what can you do",
-    "show me"
-    "what"
-    "who"
-    "how"
-    "anything"
-    "something"
-    "regarding"
-    "Yes"
-];
 
-if (projectKeywords.some(word => input.includes(word))) {
-    return "Check out:\na. Smart Aqua Grow\nb. Water Level Indicator\nc. Gesture Control System\nd. Smart Glasses\ne. Blind Stick\nf. Chat Bot";
+    else if (input.includes("not good") || input.includes("bad") || input.includes("upset")|| input.includes("sad")) {
+        return "Ohh, sorry to hear that. Is there anything I can help you with?";
+    } 
+
+    else if (input.includes("good") || input.includes("great") || input.includes("fine")) {
+        return "That's great to know. How can I help you?";
     }
-    else if (input.includes("aqua grow") || input.includes("1")|| input.includes("a")) {
+
+    else if (input.includes("nothing") || input.includes("nah") || input === "no") {
+        return "Alright, feel free to come back anytime!";
+    }
+
+    else if (projectKeywords.some(word => input.includes(word))) {
+        return "Check out:-\n1) Smart Aqua Grow\n2) Water Level Indicator\n3) Gesture Control System\n4) Smart Glasses\n5) Blind Stick\n6) Chat Bot\n7) Radar System";
+    }
+
+    else if (input.includes("aqua grow") || input.includes("1")) {
         return "The Smart Aqua Grow project is an automated plant watering system designed to maintain optimal soil moisture levels without manual effort. It uses moisture sensors to detect the water content in the soil and controls a water pump accordingly. When the soil becomes dry, the system automatically activates the pump to supply water to the plants. This helps in conserving water and ensures healthy plant growth. The project is cost-effective, efficient, and suitable for home gardens, agriculture, and smart irrigation systems.";
     }
-    else if (input.includes("water") || input.includes("2")|| input.includes("b")) {
+
+    else if (input.includes("water") || input.includes("2")) {
         return "A water level indicator is a system used to monitor and display the level of water in a tank or container. It works by using sensors or probes that detect water levels and provide indications through LEDs or displays. This helps prevent overflow, ensures efficient water usage, and protects pumps from dry running.";
+
     }    
-    else if (input.includes("gesture") || input.includes("3")|| input.includes("c")) {
+
+    else if (input.includes("gesture") || input.includes("3")) {
         return "This project uses two ultrasonic sensors with an Arduino to detect hand movements and measure the distance between the hand and sensors. The sensors are placed on the top edges of a laptop screen, and the collected data is sent to a Python program. The distance readings are then converted into keyboard and system control actions. Different gestures like moving the hand closer or farther, or swiping across sensors, allow the user to perform tasks such as scrolling, adjusting volume, switching tabs, and controlling media playback.";
+
     }    
-    else if (input.includes("stick") || input.includes("5")|| input.includes("d")) {
+
+    else if (input.includes("glasses") || input.includes("4")) {
+        return "The Smart Vision Glasses are designed to assist visually impaired individuals by providing real-time environmental awareness through advanced image processing. The system uses a camera along with a Convolutional Neural Network (CNN) to detect and recognize objects around the user, while an integrated API enables communication for features like voice feedback and navigation assistance. It also incorporates GPS for real-time location tracking and GSM for sending emergency alerts to predefined contacts. This combination enhances safety, independence, and accessibility by converting visual data into useful alerts for the user.";
+
+    }    
+
+    else if (input.includes("stick") || input.includes("5")) {
         return "The Ultrasonic Blind Stick is an assistive device designed to help visually impaired individuals navigate safely using obstacle detection technology. It uses ultrasonic sensors to detect nearby obstacles and alerts the user through buzzer or vibration signals. The integration of GPS enables real-time location tracking, while the GSM module allows sending emergency messages with location details to predefined contacts. This system enhances safety, independence, and mobility for users in both indoor and outdoor environments.";
     }    
-    else if (input.includes("glasses") || input.includes("4")|| input.includes("e")) {
-        return "The Smart Vision Glasses are designed to assist visually impaired individuals by providing real-time environmental awareness through advanced image processing. The system uses a camera along with a Convolutional Neural Network (CNN) to detect and recognize objects around the user, while an integrated API enables communication for features like voice feedback and navigation assistance. It also incorporates GPS for real-time location tracking and GSM for sending emergency alerts to predefined contacts. This combination enhances safety, independence, and accessibility by converting visual data into useful alerts for the user.";
-    }    
-    else if (input.includes("chat") || input.includes("6")|| input.includes("f")) {
+
+    else if (input.includes("chat") || input.includes("6")) {
         return "The SmartChat UI is a simple web-based chatbot built using HTML, CSS, and JavaScript to simulate basic human-like conversations. It processes user input and responds using predefined rules and keyword matching techniques. The chatbot provides interactive replies for greetings, emotions, and project-related queries, making it user-friendly and engaging. This project demonstrates fundamental concepts of front-end development and logical thinking in building conversational interfaces.";
     }
-    else if (input.includes("bye") || input.includes("thanks")|| input.includes("no"))  {
-        return "Goodbye! Have a great day! 👋";
-    } 
-    else {
-        return "Sorry, I didn't understand that, Do you wanna know about Projects";
+    
+    else if (input.includes("radar") || input.includes("7")) {
+        return "This project is an ultrasonic-based radar system designed to detect both stationary and moving objects by measuring distance using high-frequency sound waves. It uses an ultrasonic sensor mounted on a servo motor that continuously rotates to scan the surroundings and collect real-time distance data. The data is processed and displayed through a graphical interface, creating a radar-like visualization useful for applications such as obstacle detection, robotics, and basic surveillance systems.";
     }
-}   
+    
+    else if (input.includes("bye") || input.includes("thank"))  {
+        return "Goodbye! Have a great day! ";
+    } 
+
+    else {
+        return "Sorry, I didn't understand that \nDo you want to know about projects?";
+    }
+}
 
 // Enter key support
 document.getElementById("userInput").addEventListener("keypress", function(e) {
@@ -217,7 +235,5 @@ document.getElementById("userInput").addEventListener("keypress", function(e) {
 
 </body>
 </html>
-
-
 
 
