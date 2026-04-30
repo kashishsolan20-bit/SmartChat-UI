@@ -18,4 +18,4 @@ A simple chatbot interface built using HTML, CSS, and JavaScript.
 3. Try typing "project"
 
 ## Preview
-(Add screenshot here later)
+<img src="docs/SmartchatUI.png" alt="SmartChat UI" width="500"/>
